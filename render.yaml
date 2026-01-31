@@ -1,0 +1,20 @@
+# Engine Room AI - 8-Agent Legal Intake System
+# "We don't sell you a chatbot. We give you a team."
+
+services:
+  - type: web
+    name: legal-intake-8-agent
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false  # Set manually in Render dashboard
+      - key: DEMO_PASSWORD
+        sync: false  # Set manually in Render dashboard
+      - key: SECRET_KEY
+        generateValue: true
+      - key: PYTHON_VERSION
+        value: 3.11.0
+    healthCheckPath: /health
